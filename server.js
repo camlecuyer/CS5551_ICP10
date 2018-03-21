@@ -12,13 +12,19 @@ app.use(cors());
 var httpServer = http.createServer(app);
 httpServer.listen(8081);
 
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res) {
+    res.render('index');
+});
+
 app.all('/', function(req,res,next) {
     res.header("Access-Control-Allow-Origins", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next()
 });
 
-app.get('/index.html', function(req, res,next) {
+/*app.get('/index.html', function(req, res,next) {
     var pathname = url.parse(req.url).pathname;
     console.log("Request for " + pathname + " received.");
     fs.readFile(pathname.substr(1), function (err, data) {
@@ -39,7 +45,7 @@ app.get('/index.html', function(req, res,next) {
         // Send the response body
         res.end();
     });
-});
+});*/
 
 app.get('/app.js', function(req, res,next) {
     var pathname = url.parse(req.url).pathname;

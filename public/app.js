@@ -13,7 +13,7 @@ angular.module('myApp', [])
 
                 $http({url:"http://localhost:8081/api/" + clothesEntered, method: 'POST'}).then(function(data, status){
                     $scope.venue = data.data.title;
-                    alert(data.data.title);
+                    //alert(data.data.title);
                 });
             }
         }
