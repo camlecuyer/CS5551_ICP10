@@ -1,29 +1,15 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http) { 
-  	$scope.todo = {
-  		title: "Things I Need to Do",
-  		list: ["Clean my room", "Go to the store", "Study Cracking the Coding Interview"]
-  	}
-
-  	$scope.books = {
-  		title: "Books I Need to Buy",
+  	$scope.items = {
+  		title: "Items",
   		list: []
   	}
-
-    function hasOnlyNumbers(item) {
-      return /^[0-9]*$/.test(item)
-    }
   	
-    $scope.addItem = function(itemList, item) {
+    $scope.getItem = function(itemList, item) {
       // ISBN : 10 or 13 length and consisdt of only numbers
-      if ((item.length == 10 || item.length == 13) && hasOnlyNumbers(item)) {
-        console.log("ISBN");
-        $http.get("https://www.googleapis.com/books/v1/volumes?q=isbn:" + item).success(function(data) {
-          itemList.push("Title: " + data.items[0].volumeInfo.title + " // Author(s):" + data.items[0].volumeInfo.authors)
+        console.log(item);
+        $http.get("https://api.indix.com/v2/summary/products?countryCode=US&q="+ item + "&app_key=w2xqtl4uBXLJnCk0zscGrt86TEh80bmx").success(function(data) {
+          itemList.push("Name: " + data.result.products[0].title);
         })
-      } else {
-        console.log("Not an ISBN")
-        itemList.push(item);
-      }
   	}
 
 }]);
