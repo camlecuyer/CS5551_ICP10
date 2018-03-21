@@ -11,7 +11,7 @@ angular.module('myApp', [])
 
             if (clothesEntered != "") {
 
-                $http({url:"http://localhost:8081/api/" + clothesEntered, method: 'POST'}).then(function(data, status){
+                $http({url:"http://localhost:8080/api/" + clothesEntered, method: 'POST'}).then(function(data, status){
                     $scope.venue = data.data.title;
                     //alert(data.data.title);
                 });

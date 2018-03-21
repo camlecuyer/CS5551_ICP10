@@ -1,7 +1,7 @@
 /**
  * Created by Marmik on 04/10/2016.*/
-var http = require('http');
-var fs = require("fs");
+//var http = require('http');
+//var fs = require("fs");
 var url = require('url');
 var cors = require('cors');
 var express = require('express');
@@ -9,19 +9,20 @@ var request = require('request');
 
 var app = express();
 app.use(cors());
-var httpServer = http.createServer(app);
-httpServer.listen(8081);
+/*var httpServer = http.createServer(app);
+httpServer.listen(8081);*/
+var port = process.env.PORT || 8080;
 
 app.use(express.static(__dirname + '/public'));
-
-app.get('/', function(req, res) {
-    res.render('index');
-});
 
 app.all('/', function(req,res,next) {
     res.header("Access-Control-Allow-Origins", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
+    next();
+});
+
+app.get('/', function(req, res) {
+    res.render('index');
 });
 
 /*app.get('/index.html', function(req, res,next) {
@@ -45,7 +46,7 @@ app.all('/', function(req,res,next) {
         // Send the response body
         res.end();
     });
-});*/
+});
 
 app.get('/app.js', function(req, res,next) {
     var pathname = url.parse(req.url).pathname;
@@ -91,7 +92,7 @@ app.get('/app.css', function(req, res,next) {
         // Send the response body
         res.end();
     });
-});
+});*/
 
 app.post('/api/*', function (req, res) {
     var pathname = url.parse(req.url).pathname;
@@ -114,4 +115,8 @@ app.post('/api/*', function (req, res) {
        res.send(ven);
    });
 });
+
+app.listen(port, function() {
+    console.log('app running')
+})
 console.log('Client Server running at http://127.0.0.1:8081/');
