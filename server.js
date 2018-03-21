@@ -1,7 +1,5 @@
 /**
  * Created by Marmik on 04/10/2016.*/
-//var http = require('http');
-//var fs = require("fs");
 var url = require('url');
 var cors = require('cors');
 var express = require('express');
@@ -9,8 +7,6 @@ var request = require('request');
 
 var app = express();
 app.use(cors());
-/*var httpServer = http.createServer(app);
-httpServer.listen(8081);*/
 var port = process.env.PORT || 8080;
 
 app.use(express.static(__dirname + '/public'));
@@ -24,75 +20,6 @@ app.all('/', function(req,res,next) {
 app.get('/', function(req, res) {
     res.render('index');
 });
-
-/*app.get('/index.html', function(req, res,next) {
-    var pathname = url.parse(req.url).pathname;
-    console.log("Request for " + pathname + " received.");
-    fs.readFile(pathname.substr(1), function (err, data) {
-        if (err) {
-            console.log(err);
-            // HTTP Status: 404 : NOT FOUND
-            // Content Type: text/plain
-            res.writeHead(404, {'Content-Type': 'text/html'});
-        } else {
-            //Page found
-            // HTTP Status: 200 : OK
-            // Content Type: text/plain
-            res.writeHead(200, {'Content-Type': 'text/html'});
-
-            // Write the content of the file to response body
-            res.write(data.toString());
-        }
-        // Send the response body
-        res.end();
-    });
-});
-
-app.get('/app.js', function(req, res,next) {
-    var pathname = url.parse(req.url).pathname;
-    console.log("Request for " + pathname + " received.");
-    fs.readFile(pathname.substr(1), function (err, data) {
-        if (err) {
-            console.log(err);
-            // HTTP Status: 404 : NOT FOUND
-            // Content Type: text/plain
-            res.writeHead(404, {'Content-Type': 'text/html'});
-        } else {
-            //Page found
-            // HTTP Status: 200 : OK
-            // Content Type: text/plain
-            res.writeHead(200, {'Content-Type': 'text/html'});
-
-            // Write the content of the file to response body
-            res.write(data.toString());
-        }
-        // Send the response body
-        res.end();
-    });
-});
-
-app.get('/app.css', function(req, res,next) {
-    var pathname = url.parse(req.url).pathname;
-    console.log("Request for " + pathname + " received.");
-    fs.readFile(pathname.substr(1), function (err, data) {
-        if (err) {
-            console.log(err);
-            // HTTP Status: 404 : NOT FOUND
-            // Content Type: text/plain
-            res.writeHead(404, {'Content-Type': 'text/html'});
-        } else {
-            //Page found
-            // HTTP Status: 200 : OK
-            // Content Type: text/plain
-            res.writeHead(200, {'Content-Type': 'text/html'});
-
-            // Write the content of the file to response body
-            res.write(data.toString());
-        }
-        // Send the response body
-        res.end();
-    });
-});*/
 
 app.post('/api/*', function (req, res) {
     var pathname = url.parse(req.url).pathname;
